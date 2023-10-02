@@ -4,12 +4,13 @@
 
 function makeOne() {
 	const resultOne = document.getElementById('result1');
-	//Блок try
-	functionWithErrors(); //Попытка вызова несуществующей функции
-	resultOne.textContent = 'Функция вызвана без ошибок';
-	//Блок catch
-	resultOne.textContent = 'Ошибка была перехвачена: ' + error.message;
-	console.error('Ошибка была перехвачена:', error.message);
+	try {
+		functionWithErrors(); //Попытка вызова несуществующей функции
+		resultOne.textContent = 'Функция вызвана без ошибок';
+	} catch (error) {
+		resultOne.textContent = 'Ошибка была перехвачена: ' + error.message;
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-1').addEventListener('click', makeOne);
@@ -20,7 +21,14 @@ document.querySelector('.b-1').addEventListener('click', makeOne);
 
 function makeTwo() {
 	const resultTwo = document.getElementById('result2');
-	//Ваш код
+	e = 1;
+	try {
+		e = 2;
+		resultTwo.textContent = 'Константа e перезаписана';
+	} catch (error) {
+		resultTwo.textContent = 'Ошибка была перехвачена: ' + error.message;
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-2').addEventListener('click', makeTwo);
@@ -32,7 +40,7 @@ document.querySelector('.b-2').addEventListener('click', makeTwo);
 function makeThree() {
 	const resultThree = document.getElementById('result3');
 	try {
-		//Ваш код
+		throw new Error()
 	} catch (error) {
 		resultThree.textContent = 'Ошибка была перехвачена: ' + error.message;
 		console.error('Ошибка была перехвачена:', error.message);
@@ -45,7 +53,14 @@ document.querySelector('.b-3').addEventListener('click', makeThree);
 //Cоздайте функцию makeFour, которая использует блок try/catch. Ошибка не должна выводиться на экран, а должен быть выведен результат умножения в элемент с id "result4".
 
 function makeFour() {
-	//Ваш код
+	const resultFour = document.getElementById('result4');
+	try {
+		const result = 2 * 5;
+		resultFour.textContent = 'Результат умножеия: ' + result;
+	} catch (error) {
+		resultFour.textContent = 'Ошибка была перехвачена: ' + error.message;
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-4').addEventListener('click', makeFour);
@@ -54,10 +69,16 @@ document.querySelector('.b-4').addEventListener('click', makeFour);
 //Допишите функцю makeFive так, чтобы она использовала оператор throw для генерации исключения в случае ошибки
 
 function makeFive() {
-	let inputData = -1;
-	if (inputData < 0)
-		//Ваш код
+	const resultFive = document.getElementById('result5');
+	try {
+		let inputData = -1;
+		if (inputData < 0)
+			throw new Error('Значение должно быть положительным');
 		return inputData == 0 ? 1 : inputData * (inputData - 1);
+	} catch (error) {
+		resultFive.textContent = 'Ошибка была перехвачена: ' + error.message;
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-5').addEventListener('click', makeFive);
@@ -66,8 +87,16 @@ document.querySelector('.b-5').addEventListener('click', makeFive);
 //Создайте функцию makeSix, которая ополнит код функции makeFive так, чтобы она использовала оператор throw для генерации исключения в случае ошибки, а затем перехватывала это исключение и выводила в консоль сообщение "Ошибка перехвачена".
 
 function makeSix() {
-	let inputData = -1;
-	//Ваш код
+	const resultSix = document.getElementById('result6');
+	try {
+		let inputData = -1;
+		if (inputData < 0)
+			throw new Error('Значение должно быть положительным');
+		return inputData == 0 ? 1 : inputData * (inputData - 1);
+	} catch (error) {
+		resultSix.textContent = 'Ошибка была перехвачена: ' + error.message;
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-6').addEventListener('click', makeSix);
@@ -76,10 +105,17 @@ document.querySelector('.b-6').addEventListener('click', makeSix);
 //Допишите функцию makeSeven так, что если делитель равен нулю, бросьте исключение с сообщением "Деление на ноль недопустимо".
 
 function makeSeven() {
-	let dividend = 10;
-	let divisor = 0;
-	//Ваш код
-	return dividend / divisor;
+	const resultSeven = document.getElementById('result7');
+	try {
+		let dividend = 10;
+		let divisor = 0;
+		if (divisor === 0)
+			throw new Error('На ноль делить нельзя')
+		return dividend / divisor;
+	} catch (error) {
+		resultSeven.textContent = 'Ошибка была перехвачена: ' + error.message;
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-7').addEventListener('click', makeSeven);
