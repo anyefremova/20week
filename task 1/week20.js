@@ -106,6 +106,20 @@ document.querySelector('.b-6').addEventListener('click', makeSix);
 
 function makeSeven() {
 	const resultSeven = document.getElementById('result7');
+	let dividend = 10;
+	let divisor = 0;
+	if (divisor === 0)
+		throw new Error('На ноль делить нельзя')
+	return dividend / divisor;
+}
+
+document.querySelector('.b-7').addEventListener('click', makeSeven);
+
+//Задание 8
+//Добавьте в блок функции makeSeven блок try/catch, создайте новую функцию makeEight
+
+function makeEight() {
+	const resultSeven = document.getElementById('result7');
 	try {
 		let dividend = 10;
 		let divisor = 0;
@@ -118,26 +132,18 @@ function makeSeven() {
 	}
 }
 
-document.querySelector('.b-7').addEventListener('click', makeSeven);
-
-//Задание 8
-//Добавьте в блок функции makeSeven блок try/catch, создайте новую функцию makeEight
-
-function makeEight() {
-	//Ваш код
-}
-
 document.querySelector('.b-8').addEventListener('click', makeEight);
 
 //Задание 9
 //Добавьте в код функции makeNine блок try/catch так, чтобы вместо ошибки выводилось цифра 1 в элемент с id "result9"
 
 function makeNine() {
-	//Тут добавляете try
-	let a = 22;
-	let c = a + d;
-	//Тут catch
-	//Вывод цифры в элемент
+	try {
+		let a = 22;
+		let c = a + d;
+	} catch (error) {
+		document.getElementById('result9').textContent = '1';
+	}
 }
 
 document.querySelector('.b-9').addEventListener('click', makeNine);
@@ -152,11 +158,15 @@ function makeTen() {
 	let email = 'example.com';
 	let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-	if (!emailPattern.test(email)) {
-		throw 'Некорректный email-адрес';
+	try {
+		if (!emailPattern.test(email)) {
+			throw 'Некорректный email-адрес';
+		}
+		document.getElementById('result10').textContent = 'Email-адрес корректен';
+	} catch (error) {
+		document.getElementById('result10').textContent = error.meassge;
+		console.error('Ошибка была перехвачена:', error.message);
 	}
-
-	document.getElementById('.result7').textContent = 'Email-адрес корректен';
 }
 
 document.querySelector('.b-10').addEventListener('click', makeTen);
@@ -169,9 +179,12 @@ function makeEleven() {
 	if (!/^\d+$/.test(phoneNumber)) {
 		throw new Error('Телефонный номер должен состоять только из цифр');
 	}
-	//Ваш код
+	if (phoneNumber.length < 10) {
+		throw new Error('Некорректная длина телефонного номера');
+	}
 	console.log('Телефонный номер корректен');
 }
+
 
 document.querySelector('.b-11').addEventListener('click', makeEleven);
 
@@ -182,9 +195,9 @@ document.querySelector('.b-11').addEventListener('click', makeEleven);
 function makeTwelve() {
 	let age = 12;
 	if (age < 18) {
-		//Ваш код
+		throw new Error('Доступ запрещен для лиц младше 18 лет');
 	} else {
-		//Ваш код
+		console.log('Доступ разрешен');
 	}
 }
 
@@ -195,7 +208,15 @@ document.querySelector('.b-12').addEventListener('click', makeTwelve);
 
 function makeThirteen() {
 	let age = 10;
-	//Ваш код
+	try {
+		if (age < 18) {
+			throw new Error('Доступ запрещен для лиц младше 18 лет');
+		} else {
+			console.log('Доступ разрешен');
+		}
+	} catch (error) {
+		console.error('Ошибка была перехвачена:', error.message);
+	}
 }
 
 document.querySelector('.b-13').addEventListener('click', makeThirteen);
@@ -209,10 +230,15 @@ document.querySelector('.b-13').addEventListener('click', makeThirteen);
 
 function makeFourteen() {
 	let discount = 51;
-	if (discount < 0 || discount > 50) {
-		//Ваш код
+	try {
+		if (discount < 0 || discount > 50) {
+			throw new Error('Некорректное значение скидки');
+		} else {
+			console.log('Размер скидки' + discount);
+		}
+	} catch (error) {
+		console.error('Ошибка была перехвачена:', error.message);
 	}
-	console.log('Замените текст');
 }
 
 document.querySelector('.b-14').addEventListener('click', makeFourteen);
@@ -224,9 +250,9 @@ document.querySelector('.b-14').addEventListener('click', makeFourteen);
 function makeFifteen(a, func) {
 	const resultFifteen = document.getElementById('result15');
 	try {
-		//Ваш код
+		func(a)
 	} catch (error) {
-		//Ваш код
+		resultFifteen.textContent = error.name;
 	}
 }
 
