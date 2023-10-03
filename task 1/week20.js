@@ -370,7 +370,15 @@ function fetchData() {
 }
 
 function makeTwentyOne() {
-	//Ваш код
+	const resultTwentyOne = document.getElementById('result21');
+	const finallyTwentyOne = document.getElementById('result21a');
+	try {
+		resultTwenty.textContent = fetchData()
+	} catch (error) {
+		resultTwentyOne.textContent = 'Ошибка';
+	} finally {
+		finallyTwentyOne.textContent = 'fianlly';
+	}
 }
 
 // добавьте слушатель события
@@ -383,13 +391,14 @@ const json = '{ некорректный JSON }';
 
 function makeTwentyTwo() {
 	const resultTwentyTwo = document.getElementById('result22');
-	//Блок try
-	let user = JSON.parse(json); //Возникает ошибка
-	console.log(user.name); //Не сработает
-	//Блок catch (e)
-	resultTwentyTwo.textContent = 'Извините, в данных ошибка, мы попробуем получить их ещё раз.';
-	console.log(e.name);
-	console.log(e.message);
+	try {
+		let user = JSON.parse(json); //Возникает ошибка
+		console.log(user.name); //Не сработает
+	} catch (e) {
+		resultTwentyTwo.textContent = 'Извините, в данных ошибка, мы попробуем получить их ещё раз.';
+		console.log(e.name);
+		console.log(e.message);
+	}
 }
 
 document.querySelector('.b-22').addEventListener('click', makeTwentyTwo);
@@ -402,7 +411,14 @@ const jsonTwentyThree = '{ некорректный JSON }';
 
 function makeTwentyThree() {
 	const resultTwentyThree = document.getElementById('result23');
-	//Ваш код
+	try {
+		let user = JSON.parse(jsonTwentyThree);
+		console.log(user.name);
+	} catch (e) {
+		resultTwentyThree.textContent = 'Извините, в данных ошибка, мы попробуем получить их ещё раз.';
+		console.log(e.name);
+		console.log(e.message);
+	}
 }
 
 // Добавьте слушатель события
