@@ -264,7 +264,11 @@ document.querySelector('.b-15').addEventListener('click', makeFifteen);
 
 function makeSixteen(n, func) {
 	const resultSixteen = document.getElementById('result16');
-	//Ваш код
+	try {
+		func(n)
+	} catch (error) {
+		resultSixteen.textContent = error.message;
+	}
 }
 
 document.querySelector('.b-16').addEventListener('click', makeSixteen);
@@ -275,7 +279,11 @@ document.querySelector('.b-16').addEventListener('click', makeSixteen);
 
 function makeSeventeen(str, func) {
 	const resultSeventeen = document.getElementById('result17');
-	//Ваш код
+	try {
+		func(str)
+	} catch (error) {
+		resultSeventeen.textContent = error.message;
+	}
 }
 
 // добавьте слушатель события
@@ -288,17 +296,18 @@ document.querySelector('.b-17').addEventListener('click', makeSeventeen);
 function makeEighteen() {
 	const resultEighteen = document.getElementById('result18');
 	const forWordFinally = document.getElementById('result18a');
-	//Блок try
-	//Некорректная операция деления для примера, может вызвать ошибку
-	if (true) {
-		throw new Error('Division by zero');
+	try {
+		const result = 12 / 0;
+		resultEighteen.textContent = result;
+		if (true) {
+			throw new Error('Division by zero');
+		}
+	} catch (error) {
+		console.error(error);
+		resultEighteen.textContent = '0';
+	} finally {
+		forWordFinally.textContent = 'finally';
 	}
-	const result = 12 / 0;
-	resultEighteen.textContent = result;
-	//Блок catch (error)
-	console.error(error); //Вывод ошибки в консоль
-	resultEighteen.textContent = '0'; //Вывод '0' при ошибке
-	//Блок finally
 }
 
 document.querySelector('.b-18').addEventListener('click', makeEighteen);
@@ -309,14 +318,16 @@ document.querySelector('.b-18').addEventListener('click', makeEighteen);
 
 function makeNineteen() {
 	const resultNineteen = document.getElementById('result19');
-	//Блок try
-	const arr = [1, 2, 3];
-	const sum = arr.reduce((acc, val) => acc + val, 0);
-	resultNineteen.textContent = sum;
-	//Блок catch (error)
-	console.error(error); //Вывод ошибки в консоль
-	//Ваш код
-	//Блок finally
+	try {
+		const arr = [1, 2, 3];
+		const sum = arr.reduce((acc, val) => acc + val, 0);
+		resultNineteen.textContent = sum;
+	} catch (error) {
+		console.error(error);
+		resultNineteen.textContent = 'Ошибка';
+	} finally {
+		document.getElementById('result19a').textContent = 'finally';
+	}
 }
 
 document.querySelector('.b-19').addEventListener('click', makeNineteen);
@@ -333,7 +344,15 @@ function calculateValue() {
 }
 
 function makeTwenty() {
-	//Ваш код
+	const resultTwenty = document.getElementById('result20');
+	const finallyTwenty = document.getElementById('result20a');
+	try {
+		resultTwenty.textContent = calculateValue()
+	} catch (error) {
+		resultTwenty.textContent = 'Ошибка';
+	} finally {
+		finallyTwenty.textContent = 'fianlly';
+	}
 }
 
 // добавьте слушатель события
